@@ -1,0 +1,6 @@
+{
+	"name": "bearcat-cocos2d-js-example",
+	"description": "client context.json",
+	"scan": ["app-client", "app-shared"],
+	"beans": []
+}

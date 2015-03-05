@@ -1,0 +1,13 @@
+{
+  "name": "bearcat-cocos2d-js-example",
+  "version": "0.0.1",
+  "dependencies": {
+    "bearcat": "0.4.x"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-clean": "0.5.x",
+    "grunt-bearcat-browser": "0.x",
+    "grunt-browserify": "3.2.x"
+  }
+}
