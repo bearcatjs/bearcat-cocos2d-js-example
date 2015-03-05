@@ -26,7 +26,7 @@ now you can see helloworld from your browser
 
 then we modify this project to make it more sweet  
 
-create source directory for client codes   
+* create source directory for client codes   
 
 ```
 mkdir app-client
@@ -39,7 +39,7 @@ mkdir app-shared
 mkdir app-server
 ```
 
-add package.json  
+* add package.json  
 
 package.json  
 ```
@@ -58,20 +58,20 @@ package.json
 }
 ```
 
-add gruntfile.js  
+* add gruntfile.js  
 
 gruntfile.js  
 ```
 'use strict';
-
+  
 module.exports = function(grunt) {
-
+  
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-bearcat-browser');
-
+  
   var src = [];
-
+  
   // Project configuration.
   grunt.initConfig({
     // Metadata.
@@ -98,20 +98,20 @@ module.exports = function(grunt) {
       }
     }
   });
-
+  
   // Default task.
   grunt.registerTask('default', ['clean', 'bearcat_browser', 'browserify']);
 };
 ```
 
-add client.js as the client main script  
+* add client.js as the client main script  
 
 client.js  
 ```
 require('./bearcat-bootstrap.js');
 var bearcat = require('bearcat');
 window.bearcat = bearcat; // using browserify to resolve npm modules
-
+  
 cc.game.onStart = function() {
     cc.view.adjustViewPort(true);
     cc.view.setDesignResolutionSize(800, 450, cc.ResolutionPolicy.SHOW_ALL);
@@ -128,45 +128,47 @@ cc.game.onStart = function() {
             cc.director.runScene(helloWorldScene.get());
         }, self);
     });
-
+  
 };
-
+  
 cc.game.run();
 ```
 
-add client-context.json to manage codes to run for cocos2d-js  
+* add client-context.json to manage codes to run for cocos2d-js  
 
 client-context.json  
 ```
 {
-	"name": "bearcat-cocos2d-js-example",
-	"description": "client context.json",
-	"scan": ["app-client", "app-shared"],
-	"beans": []
+    "name": "bearcat-cocos2d-js-example",
+    "description": "client context.json",
+    "scan": ["app-client", "app-shared"],
+    "beans": []
 }
 ```
 
-modify project.json, simply set the jsList to an empty array, for now we use bearcat and browserify  
+as we can see, we scan ***app-client***, and ***app-shared*** for client codes   
+
+* modify project.json, simply set the jsList to an empty array, for now we use bearcat and browserify  
 
 project.json  
 ```
 {
-	"project_type": "javascript",
-
-	"debugMode": 1,
-	"showFPS": true,
-	"frameRate": 60,
-	"id": "gameCanvas",
-	"renderMode": 0,
-	"engineDir": "frameworks/cocos2d-html5",
-
-	"modules": ["cocos2d"],
-
-	"jsList": []
+    "project_type": "javascript",
+  
+    "debugMode": 1,
+    "showFPS": true,
+    "frameRate": 60,
+    "id": "gameCanvas",
+    "renderMode": 0,
+    "engineDir": "frameworks/cocos2d-html5",
+  
+    "modules": ["cocos2d"],
+  
+    "jsList": []
 }
 ```
 
-install npm dependencies  
+* install npm dependencies  
 ```
 npm install
 ```
@@ -185,25 +187,25 @@ since now, we have setted up the development envrionment with bearcat and browse
 
 ```
 var HelloWorldLayer = function() {
-	this.$id = "helloWorldLayer";
-	this.$init = "init";
-	this.ctor = null;
+    this.$id = "helloWorldLayer";
+    this.$init = "init";
+    this.ctor = null;
 }
-
+  
 HelloWorldLayer.prototype.init = function() {
-	var self = this;
-	this.ctor = cc.Layer.extend({
-		sprite: null,
-		helloLabel: null,
-		ctor: function() {
-		}
-	});
+    var self = this;
+    this.ctor = cc.Layer.extend({
+      sprite: null,
+      helloLabel: null,
+      ctor: function() {
+      }
+    });
 }
-
+  
 HelloWorldLayer.prototype.get = function() {
-	return new this.ctor();
+  return new this.ctor();
 }
-
+  
 bearcat.module(HelloWorldLayer, typeof module !== 'undefined' ? module : {});
 ```
 
@@ -223,10 +225,10 @@ for example, we can resolve ***resourceUtil*** as its dependency to resolve asse
 
 ```
 var HelloWorldLayer = function() {
-	this.$id = "helloWorldLayer";
-	this.$init = "init";
-	this.$resourceUtil = null;
-	this.ctor = null;
+    this.$id = "helloWorldLayer";
+    this.$init = "init";
+    this.$resourceUtil = null;
+    this.ctor = null;
 }
 ```
 
@@ -236,25 +238,25 @@ var HelloWorldLayer = function() {
 
 ```
 HelloWorldLayer.prototype.init = function() {
-	var self = this;
-	this.ctor = cc.Layer.extend({
-		sprite: null,
-		helloLabel: null,
-		ctor: function() {
-			// 1. super init first
-			this._super();
-
-			self.addCloseItem(this);
-
-			self.addHelloWorldLabel(this);
-
-			self.addSplashScreen(this);
-
-			self.runAction(this);
-
-			return true;
-		}
-	});
+    var self = this;
+    this.ctor = cc.Layer.extend({
+      sprite: null,
+      helloLabel: null,
+      ctor: function() {
+        // 1. super init first
+        this._super();
+  
+        self.addCloseItem(this);
+  
+        self.addHelloWorldLabel(this);
+  
+        self.addSplashScreen(this);
+  
+        self.runAction(this);
+  
+        return true;
+      }
+    });
 }
 ```
 
@@ -274,31 +276,31 @@ since this method is stateless, we can easily hot wrap it when needed
 
 ```
 HelloWorldLayer.prototype.addCloseItem = function(self) {
-	var res = this.$resourceUtil.getRes();
+    var res = this.$resourceUtil.getRes();
+  
+    // 2. add a menu item with "X" image, which is clicked to quit the program
+    // ask the window size
+    var size = cc.winSize;
+  
+    // add a "close" icon to exit the progress. it's an autorelease object
+    var closeItem = new cc.MenuItemImage(
+      res.CloseNormal_png,
+      res.CloseSelected_png,
+      function() {
+        cc.log("Menu is clicked!");
+      }, self);
 
-	// 2. add a menu item with "X" image, which is clicked to quit the program
-	// ask the window size
-	var size = cc.winSize;
-
-	// add a "close" icon to exit the progress. it's an autorelease object
-	var closeItem = new cc.MenuItemImage(
-		res.CloseNormal_png,
-		res.CloseSelected_png,
-		function() {
-			cc.log("Menu is clicked!");
-		}, self);
-
-	closeItem.attr({
-		x: size.width - 20,
-		y: 20,
-		anchorX: 0.5,
-		anchorY: 0.5
-	});
-
-	var menu = new cc.Menu(closeItem);
-	menu.x = 0;
-	menu.y = 0;
-	self.addChild(menu, 1);
+    closeItem.attr({
+      x: size.width - 20,
+      y: 20,
+      anchorX: 0.5,
+      anchorY: 0.5
+    });
+  
+    var menu = new cc.Menu(closeItem);
+    menu.x = 0;
+    menu.y = 0;
+    self.addChild(menu, 1);
 }
 ```
 
