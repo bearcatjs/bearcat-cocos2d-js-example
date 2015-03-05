@@ -6,7 +6,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-bearcat-browser');
 
-  var watchSrc = ["app-client/**/*.js", "app-shared/**/*.js"];
   var src = [];
 
   // Project configuration.
