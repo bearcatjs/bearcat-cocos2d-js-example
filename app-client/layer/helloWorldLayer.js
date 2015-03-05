@@ -54,6 +54,7 @@ HelloWorldLayer.prototype.addCloseItem = function(self) {
 		function() {
 			cc.log("Menu is clicked!");
 		}, self);
+
 	closeItem.attr({
 		x: size.width - 20,
 		y: 20,
@@ -68,10 +69,10 @@ HelloWorldLayer.prototype.addCloseItem = function(self) {
 }
 
 HelloWorldLayer.prototype.addHelloWorldLabel = function(self) {
-	// 3. add a label shows "Hello World"
+	// 3. add a label shows "Hello Bearcat"
 	// create and initialize a label
 	var size = cc.winSize;
-	var helloLabel = new cc.LabelTTF("Hello World", "Arial", 38);
+	var helloLabel = new cc.LabelTTF("Hello Bearcat", "Arial", 38);
 	// position the label on the center of the screen
 	helloLabel.x = size.width / 2;
 	helloLabel.y = 0;
