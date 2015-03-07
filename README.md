@@ -1,5 +1,7 @@
 ## bearcat-cocos2d-js-example
 
+[chinese version](http://bearcatjs.org/%E5%8D%9A%E5%AE%A2/bearcat-cocos2djs.html)
+
 ## Overview
 [cocos2d-js](https://github.com/cocos2d/cocos2d-js) is an open source game engine for web games and native games, it is the HTML5 version of [cocos2d-x](https://github.com/cocos2d/cocos2d-x) includes [cocos2d-html5](https://github.com/cocos2d/cocos2d-html5) and cocos2d-x javaScript binding (JSB). Using Cocos2d-JS, you can write games in JavaScript and run your games on browsers that support HTML5. The API is completely compatible between Cocos2d-html5 and Cocos2d-x JSB. This means that Cocos2d-JS games can be run using Cocos2d's "JavaScript Binding" on Cocos2d-x without or with very little modification.  
 
